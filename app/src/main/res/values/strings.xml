@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Contatos</string>
+    <string name="content_description_photo">Photo</string>
 </resources>
