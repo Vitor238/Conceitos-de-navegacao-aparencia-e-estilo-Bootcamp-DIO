@@ -1,5 +1,6 @@
 package com.vitor238.contatos
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -11,14 +12,15 @@ import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.vitor238.contatos.DetailActivity.Companion.EXTRA_CONTACT
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ClickItemContactListener {
 
     private val rvList: RecyclerView by lazy {
         findViewById<RecyclerView>(R.id.rv_list)
     }
 
-    private val adapter = ContactAdapter()
+    private val adapter = ContactAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,8 +61,8 @@ class MainActivity : AppCompatActivity() {
                     "img.png"
                 ),
                 Contact(
-                    "Igor Ferrani",
-                    "(00) 00000-0000",
+                    "José Almeida",
+                    "(99) 99999-9999",
                     "img.png"
                 )
             )
@@ -90,5 +92,11 @@ class MainActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun clickItemContact(contact: Contact) {
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra(EXTRA_CONTACT, contact)
+        startActivity(intent)
     }
 }
